@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fi">
+	<script>
+		function onLoad() {
+		var pvm = new Date(); 
+		var minuutti = pvm.getMinutes();
+		if(minuutti < 10) {
+			minuutti = "0" + minuutti;
+		}
+		document.getElementById("aika").innerHTML=pvm.getHours() +":" + minuutti
+		 + "\t /\t" + pvm.getDate() + "." + pvm.getMonth();
+		}
+		function lisaa() {
+			var sisalto = document.getElementById("text").value;
+			var lista = document.getElementById("lista");		
+			if(sisalto.length<=0) {
+				return;
+			}
+			lista.innerHTML+="<li>"+sisalto+" "+"<button onclick=poista()>poista</button><br></br></li>";
+		}
+
+		function poista() {
+			event.currentTarget.parentElement.remove();
+			//lähde:
+			//https://stackoverflow.com/questions/17168582/delete-current-parent-node-in-recursion/17168706
+		}
+
+		function tyhjenna() {
+			if(document.getElementById("lista").innerHTML.length>0) {
+			var jooEi = window.confirm("Halutako varmasti tyhjentää listan?");
+			if(jooEi){
+				var lista = document.getElementById("lista").innerHTML ="";
+			}
+			}
+		}
+	 </script>      
+	<head"> 
+		<title>Todo-List</title>
+		<link rel="stylesheet" href="styles.css">
+		<meta charset="utf-8" />
+		</head>	
+		
+	<body onload="onLoad()">
+	
+	<header>
+	<h1 id="eka">TO DO-LIST</h1>	
+	</header>	
+	
+	<br>
+	<p id="aika"></p>
+		
+	
+	<section class="eka">
+		<br>
+		<p id="aika"></p>
+			<h4> Lisää tehtävä/tyhjennä lista</h4>
+			<input type="text" required id="text" onfocus="this.value=''" ></input> 
+			<input onclick=lisaa() type="button" value="lisää"></input>
+			<button onclick="tyhjenna()">Tyhjennä</button>	
+			
+		</section>
+	
+	
+		<section class="toka">
+			
+			<ul id="lista" style="list-style: none;"></ul>
+			</section>
+	<p class="footer" style="float: left;">Tekijä: Lauri Oksanen</p>
+	</body>
+</html>
